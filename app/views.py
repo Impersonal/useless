@@ -1,15 +1,12 @@
 from app import app
-from app import vktest
+from app import vkhelper
 
-@app.route('/')
-@app.route('/index')
-def index():
-	vktest.auth() 
-	commentList = vktest.getComments(posts = vktest.getWallPosts(50), num = 2, count = 100)
-	i = 1
+@app.route('/<groupID>')
+def parse(groupID):
+	vk = vkhelper.VkHelper(shortid = groupID) 
+	commentList = vk.getComments(posts = vk.getWallPosts(count = 3), num = 2, count = 100)
 	res = ''
-	while i <= commentList[0]:
-		res += (commentList[i]['text'] + '<br/>').encode("utf-8")
-		i += 1
-	print str
+	commentList.pop(0)
+	for i in commentList:
+		res += (i['text'] + 2 * '<br/>').encode("utf-8")
 	return res

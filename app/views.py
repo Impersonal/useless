@@ -1,10 +1,9 @@
 from app import app
-from app import vkhelper
+from app import vk
 
 @app.route('/<groupID>')
-def parse(groupID):
-	vk = vkhelper.VkHelper(shortid = groupID) 
-	commentList = vk.getComments(posts = vk.getWallPosts(count = 3), num = 2, count = 100)
+def parse(groupID): 
+	commentList = vk.getComments(posts = vk.getWallPosts(count = 3, shortID = groupID), num = 2, count = 100, shortID = groupID)
 	res = ''
 	commentList.pop(0)
 	for i in commentList:

@@ -4,6 +4,6 @@ app = Flask(__name__)
 
 from app import vkhelper
 
-vk = vkhelper.VkHelper() 
+vk = vkhelper.VKHelper() 
 
 from app import views
